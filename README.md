@@ -3,12 +3,14 @@
 
 Stored Procedure aslında bizim normal programlama dillerinde kullandığımız fonksiyonlara benzer. Yazılan sorguların, sorgunun tamamnını değilde atandığı bir isim ile çağırılmasına stored procedure denir. Mesela elimizde özel bir select sorgusu var. Maaşı 5000 liradan yüksek olan çalışanları gösterme sorgusu:
 
-Select * from employee where employeeSalary>5000
+`Select * from employee where employeeSalary>5000`
 
 Bunu başına create procedure [prosedür_adı] as diyip bu komutu yazarak prosedürü oluşturmuş oluruz. 
 İleride kullanmak istediğimizde yalnızca execute [prosedür_adı] diyerek prosedürü oluşturabiliriz
-Bunun haricinde parametreler ile de kullanmamız mümkün. Mesela bu örnekte maaşı parametre olarak alabiliriz. Sorgu şu şekilde değişecektir
-Select * from employee where employeeSalary>@salary
+Bunun haricinde parametreler ile de kullanmamız mümkün. Mesela bu örnekte maaşı parametre olarak alabiliriz. Sorgu şu şekilde değişecektir:
+
+`Select * from employee where employeeSalary>@salary`
+
 Daha sonra bunu procedure olarak kaydedip kullanmak isteyince execute [prosedür_adı] @salary=[verilecek değer] şeklinde kullanılabilir.
 ### Avantajları:
 - Performans iyileştirmesi: Optimizasyonu sağlar, sorgu süresini azaltır ve performansı arttırır.
@@ -20,24 +22,6 @@ Daha sonra bunu procedure olarak kaydedip kullanmak isteyince execute [prosedür
 ## Trigger
 Trigger veritabanında belirli işlemlerden sonra çalışması gereken bir işin tanımlanması için kullanılır. Bir örnek üzerinden daha rahat anlatacağımı düşünüyorum. Mesela, bir e-ticaret sitemiz var. Bir satış işlendiğinde satılan ürünün stoğunun otomatik olarak azaltılması gerekir. Bu tarz işlemler için kullanılır.
 
-Örnek sorgu:
-`CREATE TRIGGER trigger_name
-{BEFORE | AFTER} {INSERT | UPDATE | DELETE}
-ON table_name
-FOR EACH ROW
-BEGIN
-    -- Trigger koşulu ve işlemleri burada tanımlanır
-    -- Örnek olarak:
-    -- İşlem yapılacak kolonların değerlerine erişmek için OLD ve NEW kavramları kullanılır.
-    -- OLD: Güncellenen veya silinen kayıt verilerini temsil eder.
-    -- NEW: Eklenen veya güncellenen kayıt verilerini temsil eder.
-
-    -- Örneğin, bir tabloya yeni bir kayıt eklenirken tetiklenen bir trigger:
-    IF NEW.column_name = 'değer' THEN
-        -- İşlemler buraya yazılır
-    END IF;
-    -- İşlemler buraya yazılır
-END;`
 ### Avantajları:
 - veri Bütünlüğü: Tüm verilerin belirli kurallara göre bir bütün halinde işlenmesini sağlar.
 - Otomatik işlemler yapmamıza olanak sağlar.
